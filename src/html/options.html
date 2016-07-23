@@ -1,0 +1,13 @@
+<html ng-app>
+    <head>
+        <title>{{title}}</title>
+        <script src="/src/lib/angular.min.js"></script>
+    </head>
+    <body ng-controller="OptionsController">
+        <div ng-for="agent in agents">
+            <agent></agent>
+        </div>
+    </body>
+    
+    <script src="/src/scripts/options.js"></script>
+</html>
