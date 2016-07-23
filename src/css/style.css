@@ -1,0 +1,19 @@
+.agent {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid lightgray;
+    border-radius: 2px;
+}
+
+.agent h4 {
+    margin: 0px 0px 10px;
+}
+
+.agent > .row:first-child {
+    margin-bottom: 10px;
+}
+
+.agent.enabled {
+    -webkit-box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.2);
+}

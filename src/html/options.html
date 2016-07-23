@@ -1,13 +1,75 @@
-<html ng-app>
+<html ng-app="agent">
     <head>
         <title>{{title}}</title>
+        <link href="/src/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/src/css/style.css" rel="stylesheet">
+
+        <script src="/src/lib/jquery.min.js"></script>
         <script src="/src/lib/angular.min.js"></script>
+        <script src="/src/lib/angular-filter.min.js"></script>
+        <script src="/src/lib/bootstrap.min.js"></script>
+        <script src="/src/lib/lodash.js"></script>
     </head>
-    <body ng-controller="OptionsController">
-        <div ng-for="agent in agents">
-            <agent></agent>
+    <body ng-controller="OptionsController as options" class="container">
+        <div>
+            <h3>New User Agent</h3>
+
+            <form ng-submit="options.createAgent(agent)">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" ng-model="agent.name" placeholder="User Agent Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" ng-model="agent.parent" placeholder="Parent Browser">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <textarea placeholder="User Agent" class="form-control" ng-model="agent.ua" rows="3">
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" class="form-control" ng-model="agent.builtin" value="false">
+                
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <div class="btn-group">
+                            <input type="submit" class="btn btn-sm btn-success">
+                            <input type="reset" class="btn btn-sm btn-default">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <hr/>
+
+        <div ng-show="options.enabledAgent">
+            <h3>Enabled Agent <small>{{ options.enabledAgent.name }}</small></h3>
+            <pre>{{ options.enabledAgent.ua }}</pre>
+            <hr/>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Custom User Agents</h3>
+                <p ng-hide="options.customUserAgents.length">No Custom User Agents</p>
+                <div ng-repeat="(key, agents) in options.customUserAgents | groupBy: 'parent'">
+                    <h4>{{ key ? key : 'Uncategorized' }}</h4>
+                    <agent ng-repeat="agent in agents track by agent.name"></agent>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3>Builtin User Agents</h3>
+                <p ng-hide="options.builtinUserAgents.length">No User Agents</p>
+                <agent ng-repeat="agent in options.builtinUserAgents track by agent.name"></agent>
+            </div>
         </div>
     </body>
     
+    <script src="/src/scripts/config.js"></script>
     <script src="/src/scripts/options.js"></script>
 </html>

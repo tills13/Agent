@@ -5,6 +5,7 @@
     "options_page": "src/html/options.html",
     "background": {
         "scripts": [
+            "src/scripts/config.js",
             "src/scripts/background.js"
         ]
     },
@@ -12,6 +13,7 @@
     "permissions": [
         "*://*/*",
         "webRequest",
-        "webRequestBlocking"
+        "webRequestBlocking",
+        "storage"
     ]
 }
